@@ -1,4 +1,3 @@
-# 目錄
 ## VPLEX/MetroNode
 ## PowerMAX
 ## PowerStore
