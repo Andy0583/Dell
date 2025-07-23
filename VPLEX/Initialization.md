@@ -1,8 +1,8 @@
 ## VPLEX Reset
 ### 1、斷開Cluster間director
-> Storage View要砍掉。</br>
+> Storage View要砍掉。  
 > 若為Metro架構，需於Cluster 2上，斷開Cluster 1 director。
-```shell
+```
 VPlexcli:/> disconnect -n director-1-1-A
 VPlexcli:/> disconnect -n director-1-1-B
 ```
@@ -10,7 +10,7 @@ VPlexcli:/> disconnect -n director-1-1-B
 ### 2、清除System Volumes
 > Storage View要砍掉。</br>
 > 若為Metro架構，需於Cluster 2上，斷開Cluster 1 director。
-```shell
+```
 VPlexcli:/> ls -la /clusters/cluster-1/system-volumes
 
 /clusters/cluster-1/system-volumes:
@@ -20,15 +20,20 @@ Name                                 Volume Type  Operational  Health  Active  R
 meta-volume                          meta-volume  ok           ok      true    true   raid-1    2          20446976  4K     78G       64000
 meta-volume_backup_2024Jun11_064729  meta-volume  ok           ok      false   true   raid-1    1          20971264  4K     80G       64000
 meta-volume_backup_2024Jun11_064850  meta-volume  ok           ok      false   true   raid-1    1          20971264  4K     80G       64000
-
+```
+```
 VPlexcli:/> meta-volume destroy --meta-volume meta-volume_backup_2024Jun11_064729
 
 Meta-volume 'meta-volume_backup_2024Jun11_064729' will be destroyed. Do you wish to continue?  (Yes/No) yes
-
+```
+```
 VPlexcli:/> meta-volume destroy --meta-volume meta-volume_backup_2024Jun11_064850
 
 Meta-volume 'meta-volume_backup_2024Jun11_064850' will be destroyed. Do you wish to continue?  (Yes/No) yes
+```
 
+
+```bash
 VPlexcli:/> script -i VPlexadmin
 
 VPlexcli:/> configuration meta-volume-cleanup
